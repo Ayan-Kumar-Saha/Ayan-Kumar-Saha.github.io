@@ -1,0 +1,17 @@
+<div class="content" #jsDropZone>
+
+    <div class="message intro">
+        <div class="note">
+            Drop BPMN diagram from your desktop or <span (click)="create()">create a new diagram</span> to get
+            started.
+        </div>
+    </div>
+
+    <div class="message error">
+        <div class="note">
+            <p>Ooops, we could not display the BPMN 2.0 diagram.</p>
+        </div>
+    </div>
+
+    <div class="canvas" #canvas></div>
+</div>
