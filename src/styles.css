@@ -3,6 +3,10 @@
 @import 'bpmn-js/dist/assets/diagram-js.css';
 @import 'bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css';
 
+test-border { border: 1px solid red; };
+test-border-2 { border: 1px solid blue; };
+test-border-3 { border: 1px solid green; };
+
 * {
     box-sizing: border-box;
 }
@@ -10,9 +14,7 @@
 body, html {
 
     font-family: 'Noto Sans', sans-serif;
-
     font-size: 12px;
-
     height: 100%;
     padding: 0;
     margin: 0;
