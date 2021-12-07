@@ -25,6 +25,18 @@ body, html {
     width: 100%;
     height: 100%;
     overflow: hidden;
+    border: 1px solid black;
+    background: #dfdede;
+}
+
+.content {
+    width: 1000px;
+    height: 80%;
+    margin: 5rem auto;
+}
+
+.bjs-powered-by {
+    display: none;
 }
 
 .content>.message {
@@ -105,4 +117,15 @@ span {
     color: blue;
     font-size: 1.5rem;
     cursor: pointer;
+}
+
+.bpmn-icon-lasso-tool, 
+.bpmn-icon-space-tool,
+.bpmn-icon-participant,
+.bpmn-icon-data-object,
+.bpmn-icon-gateway-none,
+.bpmn-icon-intermediate-event-none,
+.bpmn-icon-data-store,
+.bpmn-icon-group {
+    display: none;
 }

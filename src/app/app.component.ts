@@ -37,4 +37,16 @@ export class AppComponent {
     const xml = await this.bpmnService.exportDiagram();
     localStorage.setItem('diagram', xml);
   }
+
+  zoomIn() {
+    this.bpmnService.zoomController(1);
+  }
+
+  zoomOut() {
+    this.bpmnService.zoomController(-1);
+  }
+
+  resetZoom() {
+    this.bpmnService.zoomController(0, true)
+  }
 }
