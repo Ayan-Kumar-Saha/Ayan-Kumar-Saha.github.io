@@ -14,16 +14,19 @@
     </div>
 
     <div class="canvas" #canvas></div>
+    <div class="io-zoom-control">
+        <ul class="io-control-list">
+            <li><button mat-icon-button (click)="zoomIn()"><mat-icon>zoom_in</mat-icon></button></li>
+            <li><button mat-icon-button (click)="zoomOut()"><mat-icon>zoom_out</mat-icon></button></li>
+            <li><button mat-icon-button (click)="resetZoom()"><mat-icon>crop_free</mat-icon></button></li>
+            <li><button mat-icon-button (click)="fullScreen()">
+                <mat-icon *ngIf="!isFullScreenViewActive">zoom_out_map</mat-icon>
+                <mat-icon *ngIf="isFullScreenViewActive">zoom_in_map</mat-icon>
+            </button></li>
+        </ul>
+    </div>
 </div>
 
 <button (click)="save()">SAVE</button>
-
-<div class="io-zoom-control">
-    <ul class="io-control-list">
-        <li><button (click)="zoomIn()">ZOOM IN</button></li>
-        <li><button (click)="zoomOut()">ZOOM OUT</button></li>
-        <li><button (click)="resetZoom()">RESET ZOOM</button></li>
-    </ul>
-</div>
 
 

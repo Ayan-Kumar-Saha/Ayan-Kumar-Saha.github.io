@@ -68,4 +68,14 @@ export class BpmnService {
     }
     this._bpmnModeler.get('zoomScroll').stepZoom(step);
   }
+
+  public toggleFullScreenView(el: ElementRef) {
+    if (!document.fullscreenElement) {
+      el.nativeElement.requestFullscreen();
+    } else {
+      if (document.exitFullscreen) {
+        document.exitFullscreen();
+      }
+    }
+  }
 }
