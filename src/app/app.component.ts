@@ -29,7 +29,7 @@ export class AppComponent {
 
   async ngOnInit() {
     const diagram = localStorage.getItem('diagram');
-    await this.bpmnService.createNewDiagram(diagram, this.el);
+    await this.bpmnService.createNewDiagram(diagram, this.el, true);
 
     this.bpmnService?.eventOutput?.subscribe(res => {
       this.showSnackBar(`Clicked element 👉 ${res}`)

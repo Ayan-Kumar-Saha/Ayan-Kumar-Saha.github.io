@@ -3,9 +3,23 @@
 @import 'bpmn-js/dist/assets/diagram-js.css';
 @import 'bpmn-js/dist/assets/bpmn-font/css/bpmn-embedded.css';
 
-test-border { border: 1px solid red; };
-test-border-2 { border: 1px solid blue; };
-test-border-3 { border: 1px solid green; };
+test-border {
+    border: 1px solid red;
+}
+
+;
+
+test-border-2 {
+    border: 1px solid blue;
+}
+
+;
+
+test-border-3 {
+    border: 1px solid green;
+}
+
+;
 
 * {
     box-sizing: border-box;
@@ -120,7 +134,7 @@ body, html {
     cursor: pointer;
 } */
 
-.bpmn-icon-lasso-tool, 
+.bpmn-icon-lasso-tool,
 .bpmn-icon-space-tool,
 .bpmn-icon-participant,
 .bpmn-icon-data-object,
@@ -129,4 +143,15 @@ body, html {
 .bpmn-icon-data-store,
 .bpmn-icon-group {
     display: none;
+}
+
+.djs-palette-toggle {
+    cursor: pointer !important;
+}
+
+.djs-palette.open .djs-palette-toggle {
+    width: 100% !important;
+    height: 15px !important;
+
+    background-color: #666;
 }
