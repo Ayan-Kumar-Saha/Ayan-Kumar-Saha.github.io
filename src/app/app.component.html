@@ -27,6 +27,13 @@
     </div>
 </div>
 
-<button (click)="save()">SAVE</button>
+<div style="display: flex; justify-content: center; align-items: center; gap: 10px;">
+    <button mat-raised-button color="primary" (click)="save()">Save to Browser</button>
+    <button mat-raised-button (click)="toggleView()">
+        <span *ngIf="this.canvasMode == 'editor'">Toggle to Viewer Mode</span>
+        <span *ngIf="this.canvasMode == 'viewer'">Toggle to Editor Mode</span>
+    </button>
+</div>
+
 
 

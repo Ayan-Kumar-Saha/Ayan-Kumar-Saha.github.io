@@ -12,9 +12,13 @@ export class AppComponent {
   @ViewChild('jsDropZone', { static: true }) private el: ElementRef;
   @ViewChild('canvas', { static: true }) private canvas: ElementRef;
 
+  public canvasMode: string = localStorage.getItem('mode') || 'editor';
   public isFullScreenViewActive: boolean = false;
 
-  constructor(public bpmnService: BpmnService, private _snackbar: MatSnackBar) {}
+  constructor(
+    public bpmnService: BpmnService,
+    private _snackbar: MatSnackBar
+  ) {}
 
   create() {
     this.bpmnService.createNewDiagram(
@@ -29,11 +33,15 @@ export class AppComponent {
 
   async ngOnInit() {
     const diagram = localStorage.getItem('diagram');
-    await this.bpmnService.createNewDiagram(diagram, this.el, true);
+    await this.bpmnService.createNewDiagram(
+      diagram,
+      this.el,
+      this.canvasMode == 'editor' ? true : false
+    );
 
-    this.bpmnService?.eventOutput?.subscribe(res => {
-      this.showSnackBar(`Clicked element 👉 ${res}`)
-    })
+    this.bpmnService?.eventOutput?.subscribe((res) => {
+      this.showSnackBar(`Clicked element 👉 ${res}`);
+    });
   }
 
   ngAfterContentInit() {
@@ -43,6 +51,8 @@ export class AppComponent {
   async save() {
     const xml = await this.bpmnService.exportDiagram();
     localStorage.setItem('diagram', xml);
+
+    this.showSnackBar('Saved into local storage!! 🚀')
   }
 
   zoomIn() {
@@ -54,11 +64,18 @@ export class AppComponent {
   }
 
   resetZoom() {
-    this.bpmnService.zoomController(0, true)
+    this.bpmnService.zoomController(0, true);
   }
 
   fullScreen() {
     this.isFullScreenViewActive = !this.isFullScreenViewActive;
     this.bpmnService.toggleFullScreenView(this.el);
+  }
+
+  toggleView() {
+    this.canvasMode = this.canvasMode == 'editor' ? 'viewer' : 'editor';
+    localStorage.setItem('mode', this.canvasMode);
+    
+    window.location.reload();
   }
 }

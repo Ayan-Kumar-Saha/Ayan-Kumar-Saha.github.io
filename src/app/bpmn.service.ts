@@ -8,6 +8,28 @@ import * as BpmnModeler from 'bpmn-js/dist/bpmn-modeler.production.min.js';
 import * as BpmnViewer from 'bpmn-js/dist/bpmn-viewer.production.min.js';
 import { Subject } from 'rxjs';
 import { BpmnConstantsService } from './bpmn-constants.service';
+// import CustomContextPadProvider from './custom/customContextPadProvider';
+// import CustomPaletteProvider from './custom/customPaletteProvider';
+// import ContextPadProvider from 'bpmn-js/lib/features/context-pad/ContextPadProvider.js';
+// import PaletteProvider from 'bpmn-js/lib/features/palette/PaletteProvider.js';
+
+// var _contextPadEntries = ContextPadProvider.prototype.getContextPadEntries;
+// var _paletteEntries = PaletteProvider.prototype.getPaletteEntries;
+
+// ContextPadProvider.prototype.getContextPadEntries = function (element) {
+//   const entries = _contextPadEntries.apply(this);
+//   delete entries['append.end-event'];
+//   return entries;
+// };
+
+// PaletteProvider.prototype.getPaletteEntries = function (element) {
+//   const entries = _paletteEntries.apply(this);
+//   delete entries['create.exclusive-gateway'];
+//   delete entries['create.intermediate-event'];
+//   delete entries['create.task'];
+//   delete entries['create.data-store'];
+//   return entries;
+// };
 
 @Injectable({
   providedIn: 'root',
@@ -21,8 +43,26 @@ export class BpmnService {
   public eventOutput: Subject<null | string> = new Subject<null>();
 
   constructor(private _rendererFactory: RendererFactory2) {
-    this._bpmnModeler = new BpmnModeler({ keyboard: { bindTo: document } });
+    // ContextPadProvider.prototype.getContextPadEntries = function (element) {
+    //   const entries = _contextPadEntries.apply(this);
+    //   delete entries['append.end-event'];
+    //   return entries;
+    // };
+
+    // PaletteProvider.prototype.getPaletteEntries = function (element) {
+    //   const entries = _paletteEntries.apply(this);
+    //   delete entries['create.exclusive-gateway'];
+    //   delete entries['create.intermediate-event'];
+    //   delete entries['create.task'];
+    //   delete entries['create.data-store'];
+    //   return entries;
+    // };
+
+    this._bpmnModeler = new BpmnModeler({
+      keyboard: { bindTo: document },
+    });
     this._bpmnViewer = new BpmnViewer({ keyboard: { bindTo: document } });
+
     this._renderer = _rendererFactory.createRenderer(null, null);
   }
 
@@ -48,8 +88,8 @@ export class BpmnService {
       }
       await this._bpmnInstance.importXML(xml);
 
-      this.changeShapeColor(this._bpmnInstance);
-   
+      // this.changeShapeColor(this._bpmnInstance);
+
       this._bpmnInstance.get('canvas').zoom('fit-viewport', 'auto');
 
       this._renderer.addClass(el.nativeElement, 'with-diagram');
@@ -60,17 +100,6 @@ export class BpmnService {
       eventBus.on('element.dblclick', (e) => {
         this.eventOutput.next(e.element.id);
       });
-
-      // eventBus.on('commandStack.shape.create.postExecute', (e) => {
-      //   console.log("ADDED");
-        
-      //   this.changeShapeColor(this._bpmnInstance);
-      // });
-
-      // eventBus.on('shape.changed', (e) => {
-      //   this.changeShapeColor(this._bpmnInstance);
-      // });
-
     } catch (err) {
       this._renderer.removeClass(el.nativeElement, 'with-diagram');
       this._renderer.addClass(el.nativeElement, 'with-error');
@@ -108,34 +137,5 @@ export class BpmnService {
         document.exitFullscreen();
       }
     }
-  }
-
-  private changeShapeColor(bpmnInstance) {
-    var modeling = bpmnInstance.get('modeling');
-
-    var elements = bpmnInstance.get('elementRegistry').getAll()
-
-    var generalEvents = bpmnInstance.get('elementRegistry').getAll().filter((element) => {
-      return (element.type != "bpmn:StartEvent") && (element.type != "bpmn:EndEvent")
-    })
-    var flowEvents = bpmnInstance.get('elementRegistry').getAll().filter((element) => {
-      return (element.type == "bpmn:StartEvent") || (element.type == "bpmn:EndEvent")
-    })
-
-    elements.forEach(ele => console.log(ele.type))
-    
-    console.log('FLOWEVENT', flowEvents);
-    console.log('GENERALEVENTS', generalEvents);
-    
-    // setting colors
-    modeling.setColor(generalEvents, {
-      stroke: '#333',
-      fill: '#FFE37E',
-    });
-
-    modeling.setColor(flowEvents, {
-      stroke: '#25364B',
-      fill: '#fff',
-    });
   }
 }
