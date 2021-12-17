@@ -60,8 +60,18 @@ export class BpmnService {
 
     this._bpmnModeler = new BpmnModeler({
       keyboard: { bindTo: document },
+      bpmnRenderer: {
+        defaultFillColor: '#FFE37E',
+        defaultStrokeColor: '#201C10',
+      },
     });
-    this._bpmnViewer = new BpmnViewer({ keyboard: { bindTo: document } });
+    this._bpmnViewer = new BpmnViewer({
+      keyboard: { bindTo: document },
+      bpmnRenderer: {
+        defaultFillColor: '#FFE37E',
+        defaultStrokeColor: '#201C10',
+      },
+    });
 
     this._renderer = _rendererFactory.createRenderer(null, null);
   }
