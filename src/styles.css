@@ -135,7 +135,7 @@ body, html {
 } */
 
 /* Hide unnecessary elements from palette */
-.bpmn-icon-lasso-tool,
+/* .bpmn-icon-lasso-tool,
 .bpmn-icon-space-tool,
 .bpmn-icon-participant,
 .bpmn-icon-data-object,
@@ -144,14 +144,14 @@ body, html {
 .bpmn-icon-data-store,
 .bpmn-icon-group {
     display: none;
-}
+} */
 
 /* Hide unnecessary elements from Context Pad */
-.djs-context-pad .bpmn-icon-text-annotation,
+/* .djs-context-pad .bpmn-icon-text-annotation,
 .djs-context-pad .bpmn-icon-screw-wrench,
 .djs-context-pad .bpmn-icon-gateway-none {
     display: none;
-}
+} */
 
 .djs-palette-toggle {
     cursor: pointer !important;

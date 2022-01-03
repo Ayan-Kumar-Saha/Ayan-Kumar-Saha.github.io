@@ -8,28 +8,9 @@ import * as BpmnModeler from 'bpmn-js/dist/bpmn-modeler.production.min.js';
 import * as BpmnViewer from 'bpmn-js/dist/bpmn-viewer.production.min.js';
 import { Subject } from 'rxjs';
 import { BpmnConstantsService } from './bpmn-constants.service';
-// import CustomContextPadProvider from './custom/customContextPadProvider';
-// import CustomPaletteProvider from './custom/customPaletteProvider';
-// import ContextPadProvider from 'bpmn-js/lib/features/context-pad/ContextPadProvider.js';
-// import PaletteProvider from 'bpmn-js/lib/features/palette/PaletteProvider.js';
 
-// var _contextPadEntries = ContextPadProvider.prototype.getContextPadEntries;
-// var _paletteEntries = PaletteProvider.prototype.getPaletteEntries;
-
-// ContextPadProvider.prototype.getContextPadEntries = function (element) {
-//   const entries = _contextPadEntries.apply(this);
-//   delete entries['append.end-event'];
-//   return entries;
-// };
-
-// PaletteProvider.prototype.getPaletteEntries = function (element) {
-//   const entries = _paletteEntries.apply(this);
-//   delete entries['create.exclusive-gateway'];
-//   delete entries['create.intermediate-event'];
-//   delete entries['create.task'];
-//   delete entries['create.data-store'];
-//   return entries;
-// };
+import CustomPaletteModule from './custom-bpmnjs/context-pad';
+import CustomContextPadModule from './custom-bpmnjs/palette';
 
 @Injectable({
   providedIn: 'root',
@@ -43,20 +24,6 @@ export class BpmnService {
   public eventOutput: Subject<null | string> = new Subject<null>();
 
   constructor(private _rendererFactory: RendererFactory2) {
-    // ContextPadProvider.prototype.getContextPadEntries = function (element) {
-    //   const entries = _contextPadEntries.apply(this);
-    //   delete entries['append.end-event'];
-    //   return entries;
-    // };
-
-    // PaletteProvider.prototype.getPaletteEntries = function (element) {
-    //   const entries = _paletteEntries.apply(this);
-    //   delete entries['create.exclusive-gateway'];
-    //   delete entries['create.intermediate-event'];
-    //   delete entries['create.task'];
-    //   delete entries['create.data-store'];
-    //   return entries;
-    // };
 
     this._bpmnModeler = new BpmnModeler({
       keyboard: { bindTo: document },
@@ -64,6 +31,7 @@ export class BpmnService {
         defaultFillColor: '#FFE37E',
         defaultStrokeColor: '#201C10',
       },
+      additionalModules: [CustomPaletteModule, CustomContextPadModule]
     });
     this._bpmnViewer = new BpmnViewer({
       keyboard: { bindTo: document },
