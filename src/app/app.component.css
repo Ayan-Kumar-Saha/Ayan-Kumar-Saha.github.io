@@ -1,0 +1,12 @@
+.io-zoom-control {
+    width: auto;
+    position: absolute;
+    right: 5px;
+    bottom: 10px;
+}
+
+.io-control-list {
+    list-style: none;
+    padding: 5px;
+    margin: 0;
+}
